@@ -1,20 +1,16 @@
 public class Demo {
-    public static void main(String[] args) {
-        String name = "Niroth";
-        int a = 0;
-        int[] ar = new int[6];
+    public static boolean updateCustomer() {
+        try {
+            // Read customer detail
+            // Process Data
+            // Update customer detail
+            return true;
+        } finally {
+            System.out.println("Update Sucess...");
+        }
+    }
 
-        try{
-            System.out.println("Start outer try...");
-            try{
-                System.out.println("Start inner try...");
-                int b = 24/a;
-            }catch (ClassCastException ex){
-                System.out.println("inside inner catch...");
-            }
-            System.out.println("End outer try...");
-        }catch(RuntimeException ex){
-            System.out.println("inside outer catch...");
-        }        
-    }    
+    public static void main(String[] args) {
+        updateCustomer();
+    }
 }

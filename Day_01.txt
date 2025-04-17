@@ -437,6 +437,298 @@ Start outer try...
 Start inner try...
 inside outer catch...
 
+Q21
+
+public class Demo {
+    public static void main(String[] args) {
+        String name = "Niroth";
+        int a = 0;
+        int[] ar = new int[6];
+
+        try {
+            ar[name.length()]= name.charAt(6)/a;
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+        }
+ 
+    }    
+}
+
+String index out of range: 6
+
+public class Demo {
+    public static void main(String[] args) {
+        String name = "Niroth";
+        int a = 0;
+        int[] ar = new int[6];
+
+        try {
+            ar[name.length()]= name.charAt(5)/a;
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("End main");
+    }    
+}
+
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+        at Demo.main(Demo.java:8)
+
+
+Q22
+
+public class Demo {
+    public static void main(String[] args) {
+        String name = "Niroth";
+        int a = 0;
+        int[] ar = new int[6];
+
+        try {
+            ar[name.length()]= name.charAt(5)/a;
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        System.out.println("End main");
+    }    
+}
+
+/ by zero
+java.lang.ArithmeticException: / by zero
+        at Demo.main(Demo.java:8)
+End main
+
+Q23
+
+public class Demo {
+    public static void main(String[] args) {
+        String name = "Niroth";
+        int a = 0;
+        int[] ar = new int[6];
+
+        try {
+            ar[name.length()]= name.charAt(5)/a;
+        } catch (StringIndexOutOfBoundsException ex) {
+            System.out.println("String Index Error");
+            ex.printStackTrace();
+        }catch(ArithmeticException ex){
+            System.out.println("Arithmetic Error");
+        }catch(ArrayIndexOutOfBoundsException ex){
+            System.out.println("Array Index Out Error");
+        }
+        System.out.println("End main");
+    }    
+}
+
+Q24
+
+public class Demo {
+    public static void main(String[] args) {
+        String name = "Niroth";
+        int a = 0;
+        int[] ar = new int[6];
+
+        try {
+            ar[name.length()] = name.charAt(5) / a;
+        } catch (StringIndexOutOfBoundsException ex) {
+            System.out.println("String Index Error");
+            ex.printStackTrace();
+        } 
+        int max = 4;
+        catch (ArithmeticException ex) {//Illegal, catch ladder should be continuous
+            System.out.println("Arithmetic Error");
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            System.out.println("Array Index Out Error");
+        }
+        System.out.println("End main");
+    }
+}
+
+Q25
+
+public class Demo {
+    public static void main(String[] args) {
+        String name = "Niroth";
+        int a = 0;
+        int[] ar = new int[6];
+
+        try {
+            ar[name.length()] = name.charAt(5) / a;
+        } catch (StringIndexOutOfBoundsException ex) {
+            System.out.println("String Index Error");
+            ex.printStackTrace();
+        } catch (RuntimeException ex) {//Illegal
+            System.out.println("Arithmetic Error");
+        } catch (ArrayIndexOutOfBoundsException ex) {//Illegal since unreachable
+            System.out.println("Array Index Out Error");
+        }
+        System.out.println("End main");
+    }
+}
+
+Q26
+
+public class Demo {
+    public static void main(String[] args) {
+        String name = "Niroth";
+        int a = 0;
+        int[] ar = new int[6];
+
+        try {
+            ar[name.length()] = name.charAt(5) / a;
+        } catch (StringIndexOutOfBoundsException ex) {
+            System.out.println("String Index Error");
+            ex.printStackTrace();
+        } catch (ArithmeticException ex) {//Illegal
+            System.out.println("Arithmetic Error");
+        } catch (ArrayIndexOutOfBoundsException ex) {//Illegal since unreachable
+            System.out.println("Array Index Out Error");
+        }catch(RuntimeException ex){
+            System.out.println("Any Runtime Error");
+        } catch(Exception ex){
+            System.out.println("Any Exception");
+        }
+        System.out.println("End main");
+    }
+}
+
+Q27
+
+public class Demo {
+    public static void main(String[] args) {
+        String name = "Niroth";
+        int a = 0;
+        int[] ar = new int[6];
+
+        try {
+            ar[name.length()] = name.charAt(5) / a;
+        } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException ex) {// If same code has to be run for both exceptions
+            System.out.println("Index Error");
+            ex.printStackTrace();
+        } catch (ArithmeticException ex) {// Illegal
+            System.out.println("Arithmetic Error");
+        } catch (RuntimeException ex) {
+            System.out.println("Any Runtime Error");
+        } catch (Exception ex) {
+            System.out.println("Any Exception");
+        }
+        System.out.println("End main");
+    }
+}
+
+Q28
+
+public class Demo {
+    public static void main(String[] args) {
+        String name = "Niroth";
+        int a = 0;
+        int[] ar = new int[6];
+
+        try {
+            ar[name.length()] = name.charAt(5) / a;
+        } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException ex) {
+            System.out.println("Index Error");
+            ex.printStackTrace();
+        } catch (ArithmeticException ex) {// Illegal
+            System.out.println("Arithmetic Error");
+        } catch (RuntimeException ex) {
+            System.out.println("Any Runtime Error");
+        } catch (Exception ex) {
+            System.out.println("Any Exception");
+        }finally{
+            System.out.println("finally");// executed for any exception occur
+        }
+        System.out.println("End main");
+    }
+}
+
+Q29
+
+public class Demo {
+    public static void main(String[] args) {
+        String name = "Niroth";
+        int a = 0;
+        int[] ar = new int[6];
+
+        try {
+            //ar[name.length()] = name.charAt(5) / a;
+        } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException ex) {
+            System.out.println("Index Error");
+            ex.printStackTrace();
+        } catch (ArithmeticException ex) {// Illegal
+            System.out.println("Arithmetic Error");
+        } catch (RuntimeException ex) {
+            System.out.println("Any Runtime Error");
+        } catch (Exception ex) {
+            System.out.println("Any Exception");
+        }finally{
+            System.out.println("finally");//executed even if no exception occur
+        }
+        System.out.println("End main");
+    }
+}
+
+Q30
+
+public class Demo {
+    public static void main(String[] args) {
+        String name = "Niroth";
+        int a = 0;
+        int[] ar = new int[6];
+
+        try {
+            ar[6] = 100; //throws ArrayIndexOutOfBoundsException
+        } catch (StringIndexOutOfBoundsException ex) {
+            System.out.println("Index Error");
+            ex.printStackTrace();
+        } catch (ArithmeticException ex) {// Illegal
+            System.out.println("Arithmetic Error");
+        } finally{
+            System.out.println("finally");
+        }
+        System.out.println("End main");
+    }
+}
+
+Q31
+
+public class Demo {
+    public static boolean updateCustomer(){
+        //Read customer detail
+        //Process Data
+        //Update customer detail
+        return true;
+        System.out.println("Update Sucess...");// Illegal , unreachable code
+    }
+
+    public static void main(String[] args) {
+        
+    }
+}
+
+Q32
+
+public class Demo {
+    public static boolean updateCustomer() {
+        try {
+            // Read customer detail
+            // Process Data
+            // Update customer detail
+            return true;
+        } finally {
+            System.out.println("Update Sucess...");
+        }
+    }
+
+    public static void main(String[] args) {
+        updateCustomer();
+    }
+}
+
+Q33
+
+
+
 
 
 
