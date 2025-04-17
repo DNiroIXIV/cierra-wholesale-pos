@@ -147,10 +147,77 @@ public class Demo {
 
 Q9
 
+public class Demo {
+    public static void main(String[] args) {
+        int a = 5;
+        String name = "kamal";
+        char ch;
+        
+        System.out.println("Start Main");
+        try {
+            ch = name.charAt(a);
+        } catch (StringIndexOutOfBoundsException e) {
+            ch = '\0';
+        }
+        
+        System.out.println("End Main");
+    }    
+}
 
+Q10
 
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    String sNum1 = textFieldNumber1.getText();
+    String sNum2 = textFieldNumber2.getText();
+    
+    int num1;
+    int num2;
+    try{
+        num1 = Integer.parseInt(sNum1);
+        num2 = Integer.parseInt(sNum2);
+    }catch(NumberFormatException ex){
+        num1 = 0;
+        num2 = 0; 
+    }
+    
+    int result;
+    
+    try {
+        result = num1 / num2;
+    } catch (ArithmeticException ex) {
+        result = 0;
+    }
+    labelResult.setText(String.valueOf(result));        
+}
 
+Q11
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        String sNum1 = textFieldNumber1.getText();
+        String sNum2 = textFieldNumber2.getText();
+        
+        int num1;
+        int num2;
+        try{
+            num1 = Integer.parseInt(sNum1);
+            num2 = Integer.parseInt(sNum2);
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Invalid Number...");
+            textFieldNumber1.setText("");
+            textFieldNumber2.setText("");
+            return;
+        }
+        
+        int result;
+        
+        try {
+            result = num1 / num2;
+        } catch (ArithmeticException ex) {
+            result = 0;
+            return;
+        }
+        labelResult.setText(String.valueOf(result));        
+    }                                        
 
 
 

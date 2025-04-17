@@ -1,13 +1,16 @@
 public class Demo {
     public static void main(String[] args) {
-        int a = 3, b = 0, c;
-        int[] ar = new int[3];
+        int a = 5;
+        String name = "kamal";
+        char ch;
+        
         System.out.println("Start Main");
         try {
-            ar[a] = 100;    
-        } catch (ArrayIndexOutOfBoundsException e) {
-            ar = new int[a+1];
-        }        
+            ch = name.charAt(a);
+        } catch (StringIndexOutOfBoundsException e) {
+            ch = '\0';
+        }
+        
         System.out.println("End Main");
     }    
 }
