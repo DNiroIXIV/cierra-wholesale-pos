@@ -1,16 +1,20 @@
 public class Demo {
     public static void main(String[] args) {
-        int a = 5;
-        String name = "kamal";
-        char ch;
-        
-        System.out.println("Start Main");
-        try {
-            ch = name.charAt(a);
-        } catch (StringIndexOutOfBoundsException e) {
-            ch = '\0';
-        }
-        
-        System.out.println("End Main");
+        String name = "Niroth";
+        int a = 0;
+        int[] ar = new int[6];
+
+        try{
+            System.out.println("Start outer try...");
+            try{
+                System.out.println("Start inner try...");
+                int b = 24/a;
+            }catch (ClassCastException ex){
+                System.out.println("inside inner catch...");
+            }
+            System.out.println("End outer try...");
+        }catch(RuntimeException ex){
+            System.out.println("inside outer catch...");
+        }        
     }    
 }

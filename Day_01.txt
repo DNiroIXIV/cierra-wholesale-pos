@@ -219,6 +219,232 @@ Q11
         labelResult.setText(String.valueOf(result));        
     }                                        
 
+Q12
+
+public class Demo {
+    public static void main(String[] args) {
+        int a = 24, b = 0, c;
+        System.out.println("Start Main");
+        try{
+            b = 10;
+            c = a/b;
+            System.out.println("try block");
+        }catch(ArithmeticException ex){
+            System.out.println("catch block");
+        }
+        System.out.println("End Main");
+    }    
+}
+
+Q13
+
+public class Demo {
+    public static void main(String[] args) {
+        int a = 24, b = 0, c;
+        System.out.println("Start Main");
+        try{
+            c = a/b;
+            System.out.println("try block");
+        }catch(ArithmeticException ex){
+            System.out.println("catch block");
+        }
+        //System.out.println("24/0 = " + c);
+        System.out.println("End Main");
+    }    
+}
+
+Q14
+
+public class Demo {
+    public static void main(String[] args) {
+        int a = 24, b = 0, c;
+        System.out.println("Start Main");
+        try{
+            c = a/b; // --> throws ArithmeticException
+            System.out.println("try block");
+        }catch(ArithmeticException ex){ //ClassCastException
+            System.out.println("catch block");
+        }
+        System.out.println("End Main");
+    }    
+}
+
+Q15
+
+public class Demo {
+    public static void main(String[] args) {
+        int a = 24, b = 0, c;
+        System.out.println("Start Main");
+        try{
+            c = a/b; // --> throws ArithmeticException
+            System.out.println("try block");
+        }catch(/*Insert code here*/){ 
+            System.out.println("catch block");
+        }
+        System.out.println("End Main");
+    }    
+}
+
+//A. ArithmeticException ex
+//B. RuntimeException ex
+//C. Exception ex
+//D. Throwable ex
+//E. Object ex --> Illegal
+
+Q16
+
+public class Demo {
+    public static void method1(){
+        int x = 24/0;
+    }
+    public static void method2(){
+        method1();
+    }
+    public static void method3(){
+        method2();
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Start Main");
+        method3();
+        System.out.println("End Main");
+    }    
+}
+
+Start Main
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+        at Demo.method1(Demo.java:3)
+        at Demo.method2(Demo.java:6)
+        at Demo.method3(Demo.java:9)
+        at Demo.main(Demo.java:14)
+
+Q17
+
+public class Demo {
+    public static void method1(){
+        System.out.println("Start method1");
+        int x = 24/0;
+        System.out.println("End method1");
+    }
+    public static void method2(){
+        System.out.println("Start method2");
+        try {
+            method1();
+        } catch (Exception e) {
+            
+        }
+        System.out.println("End method2");
+    }
+    public static void method3(){
+        System.out.println("Start method3");
+        method2();
+        System.out.println("End method3");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Start Main");
+        method3();
+        System.out.println("End Main");
+    }    
+}
+
+Start Main
+Start method3
+Start method2
+Start method1
+End method2
+End method3
+End Main
+
+Q18
+
+public class Demo {
+    public static void main(String[] args) {
+        String name = "Niroth";
+        int a = 0;
+        int[] ar = new int[6];
+
+        try{
+            System.out.println("Start outer try...");
+            char ch = name.charAt(6);
+            try{
+                System.out.println("Start inner try...");
+                int b = 24/a;
+            }catch (ArithmeticException ex){
+                System.out.println("inside inner catch...");
+            }
+            System.out.println("End outer try...");
+        }catch(RuntimeException ex){
+            System.out.println("inside outer catch...");
+        }
+        
+    }    
+}
+
+Q19
+
+public class Demo {
+    public static void main(String[] args) {
+        String name = "Niroth";
+        int a = 0;
+        int[] ar = new int[6];
+
+        try{
+            System.out.println("Start outer try...");
+            try{
+                System.out.println("Start inner try...");
+                int b = 24/a;
+            }catch (ArithmeticException ex){
+                System.out.println("inside inner catch...");
+            }
+            System.out.println("End outer try...");
+        }catch(RuntimeException ex){
+            System.out.println("inside outer catch...");
+        }
+        
+    }    
+}
+
+Start outer try...
+Start inner try...
+inside inner catch...
+End outer try...
+
+Q20
+
+public class Demo {
+    public static void main(String[] args) {
+        String name = "Niroth";
+        int a = 0;
+        int[] ar = new int[6];
+
+        try{
+            System.out.println("Start outer try...");
+            try{
+                System.out.println("Start inner try...");
+                int b = 24/a;
+            }catch (ClassCastException ex){
+                System.out.println("inside inner catch...");
+            }
+            System.out.println("End outer try...");
+        }catch(RuntimeException ex){
+            System.out.println("inside outer catch...");
+        }        
+    }    
+}
+
+Start outer try...
+Start inner try...
+inside outer catch...
+
+
+
+
+
+
+
+
+
 
 
 
