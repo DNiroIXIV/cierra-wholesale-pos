@@ -1,19 +1,13 @@
-import java.io.FileNotFoundException;
+class CompileTimeUncheckedException extends RuntimeException{
 
-class Vehicle{
-    public void park() throws FileNotFoundException{
-
-    }
 }
 
-class Car extends Vehicle{
-    @Override
-    public void park() throws FileNotFoundException{
-    }
+class CompileTimeCheckedException extends Exception{
+
 }
 
 public class Demo {
     public static void main(String[] args) {
         
-    }
+    }    
 }

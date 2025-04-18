@@ -918,6 +918,70 @@ public class Demo {
 
 Q43
 
+import java.io.EOFException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+
+class Vehicle{
+    public void park() throws IOException{
+
+    }
+}
+
+class Car extends Vehicle{
+    @Override
+    public void park() /*insert code here*/{
+    }
+}
+//A. throws IOException //Legal
+//B. throws FileNotFoundException //Legal (FileNotFoundException class is a sub class of IOException)
+//C. throws EOFException //Legal (EOFException class is a sub class of IOException)
+//D. throws Nothing //Legal
+//E. throws ClassNotFoundException //Illegal (not a subclass of IOException)
+//F. throws SQLException //Illegal (not a subclass of IOException)
+//G. throws RuntimeException //Legal, RuntimeException class is a compile time unchecked exception
+
+public class Demo {
+    public static void main(String[] args) {
+        
+    }
+}
+
+Q44
+
+public class Demo {
+    public static void main(String[] args) {
+        ArithmeticException ob = new ArithmeticException("message");
+        throw ob;
+    }    
+}
+
+Q45
+
+public class Demo {
+    public static void main(String[] args) {
+        Exception ob = new ArithmeticException("message");
+        throw ob; //Illegal, Exception is compile time checked
+    }    
+}
+
+Q46
+
+class CompileTimeUncheckedException extends RuntimeException{// to create compile time unchecked exception class
+
+}
+
+class CompileTimeCheckedException extends Exception{ // to create compile time checked exception class
+
+}
+
+public class Demo {
+    public static void main(String[] args) {
+        
+    }    
+}
+
 
 
 
