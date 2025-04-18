@@ -727,6 +727,197 @@ public class Demo {
 
 Q33
 
+public class Demo {
+    public static void calculate(int num1, int num2) throws ArithmeticException{
+
+    }
+
+    public static void main(String[] args) {
+        try{
+            calculate(100,50);
+        }catch(ArithmeticException ex){
+
+        }
+    }
+}
+
+Q34
+
+public class Demo {
+    public static void calculate(int num1, int num2) throws ClassNotFoundException{
+
+    }
+
+    public static void main(String[] args) {
+        calculate(100,50);// Illegal, need to handle ClassNotFoundException using try-catch block
+        //but ClassNotFoundException is a compile time checked exception so no need to handle
+    }
+}
+
+Q35
+
+public class Demo {
+    public static void calculate(int num1, int num2) throws ClassNotFoundException{
+
+    }
+
+    public static void main(String[] args) {
+        try {
+            calculate(100,50);
+            //but ClassNotFoundException is a compile time checked exception so no need to handle
+        } catch (Exception e) {
+        
+        }
+    }
+}
+
+Q36
+
+import java.io.*;
+class Demo{ 
+	public static boolean addStudent(Student student){
+		FileWriter fw=new FileWriter("Student.txt",true);
+		fw.write(student.toString()+"\n"); //student.getId()+","+student.getName()+","+....
+		fw.close();
+		return true;
+	}
+	public static void main(String args[]){ 
+		
+	} 
+}
+
+//public FileWriter(String fileName)
+           throws IOException
+
+Q37
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Demo {
+    public static boolean addStudent(Student student){
+		FileWriter fw=new FileWriter("Student.txt",true);//throws IOException
+		fw.write(student.toString()+"\n"); //write(String) -> throws IOException
+		fw.close();//throws IOException
+		return true;
+	}
+
+
+    public static void main(String[] args) {
+        
+    }
+}
+
+Q38
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Demo {
+    public static boolean addStudent(Student student) {
+        try {
+            FileWriter fw = new FileWriter("Student.txt", true);// throws IOException
+            fw.write(student.toString() + "\n"); // write(String) -> throws IOException
+            fw.close();//throws IOException
+        } catch (IOException  e) {
+            
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+
+    }
+}
+
+Q39
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Demo {
+    public static boolean addStudent(Student student) {
+        FileWriter fw = new FileWriter("Student.txt", true);// throws IOException
+        fw.write(student.toString() + "\n"); // write(String) -> throws IOException
+        fw.close();//throws IOException
+        return true;
+    }
+
+    public static void main(String[] args) {
+        addStudent(null);// throws IOException
+    }
+}
+
+Q40
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+class Demo{ 
+	public static boolean addStudent(Student student)throws IOException{
+		FileWriter fw=new FileWriter("Student.txt",true); //throws IOException
+		fw.write(student.toString()+"\n"); //write(String)->throws IOException
+		fw.close(); //throws IOException
+		return true;
+	}
+
+	public static void main(String args[]){ 
+		try{
+			addStudent(null); //throws IOException
+		}catch(IOException ex){
+			//
+		}
+	} 
+}
+
+Q41
+
+import java.io.FileNotFoundException;
+
+class Vehicle{
+    public void park(){
+
+    }
+}
+
+class Car extends Vehicle{
+    @Override
+    public void park() throws FileNotFoundException{//Illegal, when overriding a super class method in subclass; 
+        //subclass cannot have exception which is not declared for the super class method 
+        
+    }
+}
+
+public class Demo {
+    public static void main(String[] args) {
+        
+    }
+}
+
+Q42
+
+import java.io.FileNotFoundException;
+
+class Vehicle{
+    public void park() throws FileNotFoundException{
+
+    }
+}
+
+class Car extends Vehicle{
+    @Override
+    public void park() throws FileNotFoundException{
+    }
+}
+
+public class Demo {
+    public static void main(String[] args) {
+        
+    }
+}
+
+Q43
+
 
 
 

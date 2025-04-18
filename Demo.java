@@ -1,16 +1,19 @@
-public class Demo {
-    public static boolean updateCustomer() {
-        try {
-            // Read customer detail
-            // Process Data
-            // Update customer detail
-            return true;
-        } finally {
-            System.out.println("Update Sucess...");
-        }
-    }
+import java.io.FileNotFoundException;
 
+class Vehicle{
+    public void park() throws FileNotFoundException{
+
+    }
+}
+
+class Car extends Vehicle{
+    @Override
+    public void park() throws FileNotFoundException{
+    }
+}
+
+public class Demo {
     public static void main(String[] args) {
-        updateCustomer();
+        
     }
 }
