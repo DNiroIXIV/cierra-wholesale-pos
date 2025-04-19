@@ -1,0 +1,92 @@
+Q51
+
+package thogakade;
+
+public class ThogaKade {
+
+    public static void main(String[] args) {
+
+        //1. String SQL = "insert into customer values('C111', 'Niroth', 'Panadura', 60000)";
+        //2. Run Drivers s/w;
+        //3. Create a Connection Object;
+        //4. Create a Statement Object;
+        //5. Execute the SQL
+
+    }    
+}
+
+Q52
+
+package thogakade;
+
+import java.sql.*;
+
+public class ThogaKade {
+
+    public static void main(String[] args) {
+        String SQL = "insert into customer values('C111', 'Niroth', 'Panadura', 60000)";
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(SQL, SQL, SQL);
+        Statement statement = connection.createStatement();
+        statement.executeUpdate(SQL);
+    }    
+}
+
+Q53
+
+package thogakade;
+
+import java.sql.*;
+
+public class ThogaKade {
+
+    public static void main(String[] args) {
+        try {
+            String SQL = "insert into customer values('C111', 'Niroth', 'Panadura', 60000)";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(SQL, SQL, SQL);
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(SQL);
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Driver software not found");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }    
+}
+
+//Driver software not found
+//--> copy the mysql-connector-j-8.2.0.jar file and paste this file into your project folder
+//-->then if working in NetBeans project right click on Libraries and select Add JAR/Folder 
+//--> chosse the project folder and select the .jar file inside the project folder
+
+Q54
+
+package thogakade;
+
+import java.sql.*;
+
+public class ThogaKade {
+
+    public static void main(String[] args) {
+        try {
+            String SQL = "insert into customer values('C111', 'Niroth', 'Panadura', 60000)";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/thogakade", "root", "12345");
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(SQL);
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Driver software not found");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }    
+}
+
+//No suitable driver found for insert into customer values('C111', 'Niroth', 'Panadura', 60000)
+//--> provide information for url (of the local database), user and password of the localhost "jdbc:mysql://localhost/thogakade", "root", "12345"
+
+Q55
+
+
+

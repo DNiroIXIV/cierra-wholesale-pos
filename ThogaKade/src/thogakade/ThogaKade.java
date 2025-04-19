@@ -1,20 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package thogakade;
 
-/**
- *
- * @author Nirodha
- */
+import java.sql.*;
+
 public class ThogaKade {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
-    }
-    
+        try {
+            String SQL = "insert into customer values('C111', 'Niroth', 'Panadura', 60000)";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/thogakade", "root", "12345");
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(SQL);
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Driver software not found");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }    
 }
