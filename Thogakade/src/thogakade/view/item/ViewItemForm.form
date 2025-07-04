@@ -26,8 +26,8 @@
           <Group type="102" attributes="0">
               <EmptySpace pref="40" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="lblViewCustomerForm" pref="620" max="32767" attributes="0"/>
-                  <Component id="scrollPaneTableCustomer" max="32767" attributes="0"/>
+                  <Component id="lblViewItemsForm" pref="620" max="32767" attributes="0"/>
+                  <Component id="scrollPaneTableItems" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="40" max="32767" attributes="0"/>
           </Group>
@@ -42,9 +42,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace pref="20" max="32767" attributes="0"/>
-              <Component id="lblViewCustomerForm" min="-2" pref="60" max="-2" attributes="0"/>
+              <Component id="lblViewItemsForm" min="-2" pref="60" max="-2" attributes="0"/>
               <EmptySpace pref="40" max="32767" attributes="0"/>
-              <Component id="scrollPaneTableCustomer" min="-2" pref="350" max="-2" attributes="0"/>
+              <Component id="scrollPaneTableItems" min="-2" pref="350" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Component id="buttonReload" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace pref="40" max="32767" attributes="0"/>
@@ -53,7 +53,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblViewCustomerForm">
+    <Component class="javax.swing.JLabel" name="lblViewItemsForm">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Verdana" size="24" style="1"/>
@@ -62,36 +62,36 @@
           <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="View Customer Form"/>
+        <Property name="text" type="java.lang.String" value="View Items Form"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="scrollPaneTableCustomer">
+    <Container class="javax.swing.JScrollPane" name="scrollPaneTableItems">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tableCustomer">
+        <Component class="javax.swing.JTable" name="tableItems">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="0">
-                <Column editable="false" title="Customer ID" type="java.lang.String"/>
-                <Column editable="false" title="Name" type="java.lang.String"/>
-                <Column editable="false" title="Address" type="java.lang.String"/>
-                <Column editable="false" title="Salary" type="java.lang.Double"/>
+                <Column editable="false" title="Item Code" type="java.lang.String"/>
+                <Column editable="false" title="Description" type="java.lang.String"/>
+                <Column editable="false" title="Unit Price" type="java.lang.Double"/>
+                <Column editable="false" title="Qty On Hand" type="java.lang.Integer"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="30" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="120" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="60" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>

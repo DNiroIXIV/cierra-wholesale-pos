@@ -4,9 +4,11 @@
  */
 package thogakade.controller;
 
+import java.awt.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import thogakade.db.DBConnection;
 import thogakade.model.Item;
 
@@ -55,5 +57,19 @@ public class ItemController {
         pstm.setObject(3, item.getQtyOnHand());
         pstm.setObject(4, item.getCode());
         return pstm.executeUpdate() > 0;
+    }
+    
+    public static ArrayList<Item> getAllItems() throws ClassNotFoundException, SQLException{
+        ResultSet res = DBConnection.getInstance().getConnection().createStatement().executeQuery(
+                "SELECT * FROM item");
+        ArrayList<Item> itemList = new ArrayList<>();
+        while(res.next()){
+            itemList.add(new Item(
+                    res.getString("code"),
+                    res.getString("description"),
+                    res.getDouble("unitPrice"),
+                    res.getInt("qtyOnhand")));
+        }
+        return itemList;
     }
 }

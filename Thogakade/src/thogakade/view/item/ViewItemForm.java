@@ -2,24 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package thogakade.view.customer;
+package thogakade.view.item;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import thogakade.controller.CustomerController;
-import thogakade.model.Customer;
+import thogakade.controller.ItemController;
+import thogakade.model.Item;
 
 /**
  *
  * @author Nirodha
  */
-public class ViewCustomerForm extends javax.swing.JFrame {
+public class ViewItemForm extends javax.swing.JFrame {
 
     /**
      * Creates new form ViewCustomerForm
      */
-    public ViewCustomerForm() {
+    public ViewItemForm() {
         initComponents();
     }
 
@@ -32,28 +34,28 @@ public class ViewCustomerForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblViewCustomerForm = new javax.swing.JLabel();
-        scrollPaneTableCustomer = new javax.swing.JScrollPane();
-        tableCustomer = new javax.swing.JTable();
+        lblViewItemsForm = new javax.swing.JLabel();
+        scrollPaneTableItems = new javax.swing.JScrollPane();
+        tableItems = new javax.swing.JTable();
         buttonReload = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblViewCustomerForm.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        lblViewCustomerForm.setForeground(new java.awt.Color(0, 0, 0));
-        lblViewCustomerForm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblViewCustomerForm.setText("View Customer Form");
+        lblViewItemsForm.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        lblViewItemsForm.setForeground(new java.awt.Color(0, 0, 0));
+        lblViewItemsForm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblViewItemsForm.setText("View Items Form");
 
-        tableCustomer.setModel(new javax.swing.table.DefaultTableModel(
+        tableItems.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Customer ID", "Name", "Address", "Salary"
+                "Item Code", "Description", "Unit Price", "Qty On Hand"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -67,10 +69,13 @@ public class ViewCustomerForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableCustomer.getTableHeader().setReorderingAllowed(false);
-        scrollPaneTableCustomer.setViewportView(tableCustomer);
-        if (tableCustomer.getColumnModel().getColumnCount() > 0) {
-            tableCustomer.getColumnModel().getColumn(0).setResizable(false);
+        tableItems.getTableHeader().setReorderingAllowed(false);
+        scrollPaneTableItems.setViewportView(tableItems);
+        if (tableItems.getColumnModel().getColumnCount() > 0) {
+            tableItems.getColumnModel().getColumn(0).setResizable(false);
+            tableItems.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tableItems.getColumnModel().getColumn(1).setPreferredWidth(120);
+            tableItems.getColumnModel().getColumn(2).setPreferredWidth(60);
         }
 
         buttonReload.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -89,8 +94,8 @@ public class ViewCustomerForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblViewCustomerForm, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
-                    .addComponent(scrollPaneTableCustomer))
+                    .addComponent(lblViewItemsForm, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+                    .addComponent(scrollPaneTableItems))
                 .addContainerGap(40, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -101,9 +106,9 @@ public class ViewCustomerForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(lblViewCustomerForm, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblViewItemsForm, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(scrollPaneTableCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrollPaneTableItems, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(buttonReload, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(40, Short.MAX_VALUE))
@@ -114,18 +119,15 @@ public class ViewCustomerForm extends javax.swing.JFrame {
 
     private void buttonReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadActionPerformed
         try {
-            ArrayList<Customer> customerList = CustomerController.getAllCustomers();
-            DefaultTableModel dtm = (DefaultTableModel) tableCustomer.getModel();
+            ArrayList<Item> itemList = ItemController.getAllItems();
+            DefaultTableModel dtm = (DefaultTableModel) tableItems.getModel();
             dtm.setRowCount(0);
-            for (Customer customer : customerList) {
-                Object[] rowData = {
-                    customer.getId(), customer.getName(), customer.getAddress(), customer.getSalary()};
+            for (Item item : itemList) {
+                Object[] rowData = {item.getCode(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()};
                 dtm.addRow(rowData);
             }
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Driver class not found!");
-        } catch (SQLException ex) {
-            System.out.println("Database error!");
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ViewItemForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buttonReloadActionPerformed
 
@@ -146,26 +148,27 @@ public class ViewCustomerForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewCustomerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewItemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewCustomerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewItemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewCustomerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewItemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewCustomerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewItemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new ViewCustomerForm().setVisible(true);
+            new ViewItemForm().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonReload;
-    private javax.swing.JLabel lblViewCustomerForm;
-    private javax.swing.JScrollPane scrollPaneTableCustomer;
-    private javax.swing.JTable tableCustomer;
+    private javax.swing.JLabel lblViewItemsForm;
+    private javax.swing.JScrollPane scrollPaneTableItems;
+    private javax.swing.JTable tableItems;
     // End of variables declaration//GEN-END:variables
 }
