@@ -33,7 +33,7 @@ public class SearchItemForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblDeleteItemForm = new javax.swing.JLabel();
+        lblSearchItemForm = new javax.swing.JLabel();
         lblItemCode = new javax.swing.JLabel();
         txtItemCode = new javax.swing.JTextField();
         lblDescription = new javax.swing.JLabel();
@@ -43,14 +43,14 @@ public class SearchItemForm extends javax.swing.JFrame {
         lblQtyOnHand = new javax.swing.JLabel();
         txtQtyOnHand = new javax.swing.JTextField();
         btnCancel = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblDeleteItemForm.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        lblDeleteItemForm.setForeground(new java.awt.Color(0, 0, 0));
-        lblDeleteItemForm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblDeleteItemForm.setText("Delete Item Form");
+        lblSearchItemForm.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        lblSearchItemForm.setForeground(new java.awt.Color(0, 0, 0));
+        lblSearchItemForm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSearchItemForm.setText("Search Item Form");
 
         lblItemCode.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblItemCode.setForeground(new java.awt.Color(0, 0, 0));
@@ -98,12 +98,12 @@ public class SearchItemForm extends javax.swing.JFrame {
             }
         });
 
-        btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnDelete.setForeground(new java.awt.Color(0, 0, 0));
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnSearch.setForeground(new java.awt.Color(0, 0, 0));
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -114,7 +114,7 @@ public class SearchItemForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lblDeleteItemForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblSearchItemForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lblUnitPrice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -128,7 +128,7 @@ public class SearchItemForm extends javax.swing.JFrame {
                             .addComponent(txtQtyOnHand, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtItemCode, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(80, 80, 80)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(40, Short.MAX_VALUE))
@@ -137,7 +137,7 @@ public class SearchItemForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(lblDeleteItemForm, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblSearchItemForm, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblItemCode, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,31 +157,14 @@ public class SearchItemForm extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        try {
-            boolean isDeleted = ItemController.deleteItem(txtItemCode.getText());
-            if(isDeleted){
-                JOptionPane.showMessageDialog(this, "Item Deleted Successfully!");
-                txtItemCode.setText("");
-                txtDescription.setText("");
-                txtUnitPrice.setText("");
-                txtQtyOnHand.setText("");
-            }else{
-                JOptionPane.showMessageDialog(this, "Failed To Delete the Item!");
-            }
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(SearchItemForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
-    private void txtItemCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtItemCodeActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         try {
             Item item = ItemController.searchItemByCode(txtItemCode.getText());
             if(item != null){
@@ -190,11 +173,15 @@ public class SearchItemForm extends javax.swing.JFrame {
                 txtUnitPrice.setText(String.valueOf(item.getUnitPrice()));
                 txtQtyOnHand.setText(String.valueOf(item.getQtyOnHand()));
             }else{
-                JOptionPane.showMessageDialog(this, "Item not found!");
+                JOptionPane.showMessageDialog(this, "Item Not Found!");
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(SearchItemForm.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void txtItemCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtItemCodeActionPerformed
+        btnSearchActionPerformed(evt);
     }//GEN-LAST:event_txtItemCodeActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -227,21 +214,6 @@ public class SearchItemForm extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(SearchItemForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
@@ -251,11 +223,11 @@ public class SearchItemForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnDelete;
-    private javax.swing.JLabel lblDeleteItemForm;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblItemCode;
     private javax.swing.JLabel lblQtyOnHand;
+    private javax.swing.JLabel lblSearchItemForm;
     private javax.swing.JLabel lblUnitPrice;
     private javax.swing.JTextField txtDescription;
     private javax.swing.JTextField txtItemCode;
