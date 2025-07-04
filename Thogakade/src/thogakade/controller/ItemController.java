@@ -41,8 +41,19 @@ public class ItemController {
     }
     
     public static boolean deleteItem(String itemCode) throws ClassNotFoundException, SQLException{
-        PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement("DELETE FROM item WHERE code = ?");
+        PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(
+                "DELETE FROM item WHERE code = ?");
         pstm.setObject(1, itemCode);
+        return pstm.executeUpdate() > 0;
+    }
+    
+    public static boolean updateItem(Item item) throws ClassNotFoundException, SQLException{
+        PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(
+                "UPDATE item SET description=?, unitPrice=?, qtyOnHand=? WHERE code=?");
+        pstm.setObject(1, item.getDescription());
+        pstm.setObject(2, item.getUnitPrice());
+        pstm.setObject(3, item.getQtyOnHand());
+        pstm.setObject(4, item.getCode());
         return pstm.executeUpdate() > 0;
     }
 }
