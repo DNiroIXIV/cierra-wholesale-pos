@@ -174,9 +174,9 @@ public class UpdateCustomerForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Customer Not Found!");
             }
         } catch (ClassNotFoundException ex) {
-            System.out.println("Driver class not found!");
+            JOptionPane.showMessageDialog(this, "Driver Not Found!");
         } catch (SQLException ex) {
-            System.out.println("Database error!");
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_txtIdActionPerformed
 
@@ -197,9 +197,9 @@ public class UpdateCustomerForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Failed To Update Customer");
             }
         } catch (ClassNotFoundException ex) {
-            System.out.println("Driver class not found!");
+            JOptionPane.showMessageDialog(this, "Driver Not Found!");
         } catch (SQLException ex) {
-            System.out.println("Database error!");
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnUpdateCustomerActionPerformed
 

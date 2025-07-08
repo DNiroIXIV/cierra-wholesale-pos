@@ -163,25 +163,25 @@ public class SearchCustomerForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+        btnSearchCustomerActionPerformed(evt);
+    }//GEN-LAST:event_txtIdActionPerformed
+
+    private void btnSearchCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCustomerActionPerformed
         try {
             Customer customer = CustomerController.searchCustomer(txtId.getText());
-            if(customer != null){
+            if (customer != null) {
                 txtId.setText(customer.getId());
                 txtName.setText(customer.getName());
                 txtAddress.setText(customer.getAddress());
                 txtSalary.setText(String.valueOf(customer.getSalary()));
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Customer Not Found!");
             }
         } catch (ClassNotFoundException ex) {
-            System.out.println("Driver class not found!");
+            JOptionPane.showMessageDialog(this, "Driver Not Found!");
         } catch (SQLException ex) {
-            System.out.println("Database error!");
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-    }//GEN-LAST:event_txtIdActionPerformed
-
-    private void btnSearchCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCustomerActionPerformed
-        txtIdActionPerformed(evt);
     }//GEN-LAST:event_btnSearchCustomerActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -214,7 +214,7 @@ public class SearchCustomerForm extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(SearchCustomerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new SearchCustomerForm().setVisible(true);

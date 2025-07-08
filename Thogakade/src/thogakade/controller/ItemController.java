@@ -4,7 +4,6 @@
  */
 package thogakade.controller;
 
-import java.awt.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -71,5 +70,14 @@ public class ItemController {
                     res.getInt("qtyOnhand")));
         }
         return itemList;
+    }
+    
+    public static ArrayList<String> getAllItemCodes() throws ClassNotFoundException, SQLException{
+        ResultSet rst = DBConnection.getInstance().getConnection().createStatement().executeQuery("SELECT code FROM item");
+        ArrayList<String> itemCodeList = new ArrayList<>();
+        while(rst.next()){
+            itemCodeList.add(rst.getString("code"));
+        }
+        return itemCodeList;
     }
 }

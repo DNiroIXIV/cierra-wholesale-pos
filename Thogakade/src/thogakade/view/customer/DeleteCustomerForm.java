@@ -174,9 +174,9 @@ public class DeleteCustomerForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Customer Not Found!");
             }
         } catch (ClassNotFoundException ex) {
-            System.out.println("Driver class not found!");
+            JOptionPane.showMessageDialog(this, "Driver Not Found!");
         } catch (SQLException ex) {            
-            System.out.println("Database error!");
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_txtIdActionPerformed
 
@@ -193,9 +193,9 @@ public class DeleteCustomerForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Failed To Delete Customer!");
             }
         } catch (ClassNotFoundException ex) {
-            System.out.println("Driver class not found!");
+            JOptionPane.showMessageDialog(this, "Driver Not Found!");
         } catch (SQLException ex) {
-            System.out.println("Database error!");
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnDeleteCustomerActionPerformed
 

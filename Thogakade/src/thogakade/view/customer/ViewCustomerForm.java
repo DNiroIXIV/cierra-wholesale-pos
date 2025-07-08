@@ -6,6 +6,7 @@ package thogakade.view.customer;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import thogakade.controller.CustomerController;
 import thogakade.model.Customer;
@@ -123,9 +124,9 @@ public class ViewCustomerForm extends javax.swing.JFrame {
                 dtm.addRow(rowData);
             }
         } catch (ClassNotFoundException ex) {
-            System.out.println("Driver class not found!");
+            JOptionPane.showMessageDialog(this, "Driver Not Found!");
         } catch (SQLException ex) {
-            System.out.println("Database error!");
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_buttonReloadActionPerformed
 

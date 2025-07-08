@@ -20,6 +20,7 @@ public class AddCustomerForm extends javax.swing.JFrame {
      */
     public AddCustomerForm() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -175,9 +176,9 @@ public class AddCustomerForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Failed to add customer!");
             }
         } catch (ClassNotFoundException ex) {
-            System.out.println("Driver class not found!");            
+            JOptionPane.showMessageDialog(this, "Driver not found!");
         } catch (SQLException ex) {
-            System.out.println("Database error!");            
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnAddCustomerActionPerformed
 

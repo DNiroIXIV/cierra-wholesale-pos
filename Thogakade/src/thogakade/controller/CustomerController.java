@@ -23,12 +23,10 @@ public class CustomerController {
 //                customer.getId()+"','"+
 //                customer.getName()+"','"+
 //                customer.getAddress()+"',"+
-//                customer.getSalary()+")";
-
-        String SQL = "INSERT INTO customer values(?,?,?,?)";
+        
         Connection connection = DBConnection.getInstance().getConnection();
 //        Statement stm = connection.createStatement();
-        PreparedStatement stm = connection.prepareStatement(SQL);
+        PreparedStatement stm = connection.prepareStatement("INSERT INTO customer values(?,?,?,?)");
         stm.setObject(1, customer.getId());
         stm.setObject(2, customer.getName());
         stm.setObject(3, customer.getAddress());
@@ -91,5 +89,14 @@ public class CustomerController {
             ));
         }
         return customerList;
+    }
+    
+    public static ArrayList<String> getAllCustomerIds() throws ClassNotFoundException, SQLException{
+        ResultSet rst = DBConnection.getInstance().getConnection().prepareStatement("SELECT id FROM customer").executeQuery();
+        ArrayList<String> customerIdList = new ArrayList<>();
+        while (rst.next()) {            
+            customerIdList.add(rst.getString("id"));
+        }
+        return customerIdList;
     }
 }
