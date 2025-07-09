@@ -4,7 +4,7 @@
  */
 package thogakade.view.dashboard;
 
-import javax.swing.JLabel;
+import java.awt.Color;
 
 /**
  *
@@ -17,8 +17,6 @@ public class DashboardForm extends javax.swing.JFrame {
      */
     public DashboardForm() {
         initComponents();
-        jTabbedPane2.add("Add", new JLabel("Add Customer View"));
-        jTabbedPane2.add("Update", new JLabel("Update Customer View"));
     }
 
     /**
@@ -29,75 +27,90 @@ public class DashboardForm extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        NavigationsPanel = new javax.swing.JPanel();
+        btnDashboard = new javax.swing.JButton();
+        btnCustomers = new javax.swing.JButton();
+        btnOrders = new javax.swing.JButton();
+        btnItems = new javax.swing.JButton();
+        CenterPanel = new javax.swing.JPanel();
+        lblNavTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 849, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        NavigationsPanel.setBackground(Color.decode("#C995A2"));
+        NavigationsPanel.setPreferredSize(new java.awt.Dimension(260, 600));
+        NavigationsPanel.setLayout(new java.awt.GridBagLayout());
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        btnDashboard.setBackground(Color.decode("#000225"));
+        btnDashboard.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        btnDashboard.setForeground(new java.awt.Color(255, 255, 255));
+        btnDashboard.setText("Dashboard");
+        btnDashboard.setPreferredSize(new java.awt.Dimension(250, 55));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        NavigationsPanel.add(btnDashboard, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 332, Short.MAX_VALUE)
-        );
+        btnCustomers.setBackground(Color.decode("#000225"));
+        btnCustomers.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        btnCustomers.setForeground(new java.awt.Color(255, 255, 255));
+        btnCustomers.setText("Customers");
+        btnCustomers.setPreferredSize(new java.awt.Dimension(250, 55));
+        btnCustomers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCustomersActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        NavigationsPanel.add(btnCustomers, gridBagConstraints);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.LINE_START);
+        btnOrders.setBackground(Color.decode("#000225"));
+        btnOrders.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        btnOrders.setForeground(new java.awt.Color(255, 255, 255));
+        btnOrders.setText("Orders");
+        btnOrders.setPreferredSize(new java.awt.Dimension(250, 55));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        NavigationsPanel.add(btnOrders, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 332, Short.MAX_VALUE)
-        );
+        btnItems.setBackground(Color.decode("#000225"));
+        btnItems.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        btnItems.setForeground(new java.awt.Color(255, 255, 255));
+        btnItems.setText("Items");
+        btnItems.setPreferredSize(new java.awt.Dimension(250, 55));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        NavigationsPanel.add(btnItems, gridBagConstraints);
 
-        getContentPane().add(jPanel3, java.awt.BorderLayout.LINE_END);
+        getContentPane().add(NavigationsPanel, java.awt.BorderLayout.WEST);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 849, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        CenterPanel.setPreferredSize(new java.awt.Dimension(600, 600));
+        CenterPanel.setLayout(new java.awt.BorderLayout());
 
-        getContentPane().add(jPanel5, java.awt.BorderLayout.PAGE_END);
+        lblNavTitle.setBackground(Color.decode("#1E233C"));
+        lblNavTitle.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 8, 8, 8));
+        lblNavTitle.setOpaque(true);
+        lblNavTitle.setPreferredSize(new java.awt.Dimension(37, 100));
+        CenterPanel.add(lblNavTitle, java.awt.BorderLayout.PAGE_START);
 
-        jPanel4.setLayout(new java.awt.BorderLayout());
-        jPanel4.add(jTabbedPane2, java.awt.BorderLayout.CENTER);
-
-        getContentPane().add(jPanel4, java.awt.BorderLayout.CENTER);
+        getContentPane().add(CenterPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCustomersActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,19 +140,25 @@ public class DashboardForm extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DashboardForm().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new DashboardForm().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JPanel CenterPanel;
+    private javax.swing.JPanel NavigationsPanel;
+    private javax.swing.JButton btnCustomers;
+    private javax.swing.JButton btnDashboard;
+    private javax.swing.JButton btnItems;
+    private javax.swing.JButton btnOrders;
+    private javax.swing.JLabel lblNavTitle;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the CenterPanel
+     */
+    public javax.swing.JPanel getCenterPanel() {
+        return CenterPanel;
+    }
 }
