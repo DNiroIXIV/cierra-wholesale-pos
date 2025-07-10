@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="cierra-wholesale">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/cierra-wholesale/dist/cierra-wholesale.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
