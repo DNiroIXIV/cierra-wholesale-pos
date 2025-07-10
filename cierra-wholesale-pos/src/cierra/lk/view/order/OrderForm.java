@@ -30,6 +30,7 @@ import cierra.lk.view.customer.AddCustomerForm;
  */
 public class OrderForm extends javax.swing.JFrame {
 
+    private double billTotal = 0.00;
     /**
      * Creates new form OrderForm
      */
@@ -227,7 +228,7 @@ public class OrderForm extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
@@ -433,9 +434,30 @@ public class OrderForm extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbItemCodeItemStateChanged
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        DefaultTableModel dtm = (DefaultTableModel) jTableCart.getModel();
-        
-        
+        if(!validateItemFields()){
+            return;
+        }
+        int qty = 0;
+        try {
+            qty = Integer.parseInt(txtQty.getText());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter the Qty as a numeric value!");
+            txtQty.setText("");
+            return;
+        }
+        double unitPrice = Double.parseDouble(lblUnitPrice.getText());
+        double total = qty * unitPrice;
+        billTotal += total;
+        DefaultTableModel dtm = (DefaultTableModel) jTableCart.getModel();        
+        Object[] rowData = {
+            (String)cmbItemCode.getSelectedItem(),
+            lblDescription.getText(),
+            qty,
+            unitPrice,
+            total};
+        dtm.addRow(rowData);
+        clearItemRelatedFields();
+        lblTotal.setText(String.valueOf(billTotal));
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
@@ -450,6 +472,52 @@ public class OrderForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCommitActionPerformed
 
+    private void clearItemRelatedFields(){
+        cmbItemCode.setSelectedItem(null);
+        lblDescription.setText("");
+        lblUnitPrice.setText("");
+        lblQtyOnHand.setText("");
+        txtQty.setText("");                
+    }
+    
+    private boolean validateItemFields(){
+        String code = (String) cmbItemCode.getSelectedItem();
+        if(code == null || code.isEmpty()){
+            JOptionPane.showMessageDialog(this,
+                    "Please select an item code!");
+            return false;
+        }
+        
+        String description = lblDescription.getText();
+        if(description == null || description.isEmpty()){
+            JOptionPane.showMessageDialog(this,
+                    "Item description cannot be empty!");
+            return false;
+        }
+        
+        String unitPrice = lblUnitPrice.getText();
+        if(unitPrice == null || unitPrice.isEmpty()){
+            JOptionPane.showMessageDialog(this,
+                    "Unit price cannot be empty!");
+            return false;
+        }
+        
+        String qtyOnHand = lblQtyOnHand.getText();
+        if(qtyOnHand == null || qtyOnHand.isEmpty()){
+            JOptionPane.showMessageDialog(this,
+                    "Qty on Hand cannot be empty!");
+            return false;
+        }
+        
+        String qty = txtQty.getText();
+        if(qty == null || qty.isEmpty()){
+            JOptionPane.showMessageDialog(this,
+                    "Qty cannot be empty!");
+            return false;
+        }
+        return true;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -478,10 +546,8 @@ public class OrderForm extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new OrderForm().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new OrderForm().setVisible(true);
         });
     }
 
