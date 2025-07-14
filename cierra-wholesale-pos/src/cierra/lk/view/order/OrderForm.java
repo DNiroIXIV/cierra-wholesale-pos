@@ -20,9 +20,16 @@ import javax.swing.table.JTableHeader;
 import cierra.lk.controller.CustomerController;
 import cierra.lk.controller.ItemController;
 import cierra.lk.controller.OrderController;
+import cierra.lk.db.DBConnection;
 import cierra.lk.model.Customer;
 import cierra.lk.model.Item;
+import cierra.lk.model.Order;
+import cierra.lk.model.OrderDetail;
 import cierra.lk.view.customer.AddCustomerForm;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -90,13 +97,13 @@ public class OrderForm extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
         jScrollPaneCart = new javax.swing.JScrollPane();
-        jTableCart = new javax.swing.JTable();
+        tblCart = new javax.swing.JTable();
         labelTotal = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         btnCommit = new javax.swing.JButton();
         btnPlaceOrder = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblPlaceOrderForm.setFont(new java.awt.Font("sansserif", 1, 36)); // NOI18N
         lblPlaceOrderForm.setForeground(new java.awt.Color(0, 0, 0));
@@ -218,8 +225,8 @@ public class OrderForm extends javax.swing.JFrame {
             }
         });
 
-        jTableCart.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
-        jTableCart.setModel(new javax.swing.table.DefaultTableModel(
+        tblCart.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        tblCart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -242,9 +249,9 @@ public class OrderForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTableCart.setRowHeight(20);
-        jTableCart.getTableHeader().setReorderingAllowed(false);
-        jScrollPaneCart.setViewportView(jTableCart);
+        tblCart.setRowHeight(20);
+        tblCart.getTableHeader().setReorderingAllowed(false);
+        jScrollPaneCart.setViewportView(tblCart);
 
         labelTotal.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         labelTotal.setForeground(Color.decode("#e60000"));
@@ -448,7 +455,7 @@ public class OrderForm extends javax.swing.JFrame {
         double unitPrice = Double.parseDouble(lblUnitPrice.getText());
         double total = qty * unitPrice;
         billTotal += total;
-        DefaultTableModel dtm = (DefaultTableModel) jTableCart.getModel();        
+        DefaultTableModel dtm = (DefaultTableModel) tblCart.getModel();        
         Object[] rowData = {
             (String)cmbItemCode.getSelectedItem(),
             lblDescription.getText(),
@@ -461,15 +468,59 @@ public class OrderForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = tblCart.getSelectedRow();
+        if(selectedRow != -1){
+            DefaultTableModel dtm = (DefaultTableModel)tblCart.getModel();
+            dtm.removeRow(selectedRow);
+        }else{
+            JOptionPane.showMessageDialog(this, "Please select a row to remove from the cart!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnPlaceOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaceOrderActionPerformed
-        // TODO add your handling code here:
+        String orderId = lblOrderId.getText();
+        ArrayList<OrderDetail> orderDetailsList = new ArrayList<>();
+        DefaultTableModel dtm = (DefaultTableModel)tblCart.getModel();        
+        
+        for (int i = 0; i < dtm.getRowCount(); i++) {
+            orderDetailsList.add(new OrderDetail(
+                            orderId,
+                            (String) dtm.getValueAt(i, dtm.findColumn("Code")),
+                            (int) dtm.getValueAt(i, dtm.findColumn("Qty")),
+                            (double) dtm.getValueAt(i, dtm.findColumn("Unit Price"))
+            ));                            
+        }
+        
+        try {
+            boolean isNewOrderAdded = OrderController.addNewOrder(new Order(
+                    orderId,
+                    txtOrderDate.getText(),
+                    (String)cmbCustomerId.getSelectedItem(),
+                    orderDetailsList
+            ));
+            
+            if(isNewOrderAdded){
+                JOptionPane.showMessageDialog(this, "Order placed successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                resetOrderFromToInitialState();
+            }else{
+                JOptionPane.showMessageDialog(this, "Failed to place the order!", "Failure", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OrderForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnPlaceOrderActionPerformed
 
     private void btnCommitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCommitActionPerformed
-        // TODO add your handling code here:
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            connection.commit();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OrderForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnCommitActionPerformed
 
     private void clearItemRelatedFields(){
@@ -560,7 +611,6 @@ public class OrderForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbCustomerId;
     private javax.swing.JComboBox<String> cmbItemCode;
     private javax.swing.JScrollPane jScrollPaneCart;
-    private javax.swing.JTable jTableCart;
     private javax.swing.JLabel labelCode;
     private javax.swing.JLabel labelCustomerId;
     private javax.swing.JLabel labelCustomerName;
@@ -578,6 +628,7 @@ public class OrderForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblQtyOnHand;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblUnitPrice;
+    private javax.swing.JTable tblCart;
     private javax.swing.JTextField txtOrderDate;
     private javax.swing.JTextField txtQty;
     // End of variables declaration//GEN-END:variables
@@ -631,7 +682,7 @@ public class OrderForm extends javax.swing.JFrame {
     }
 
     private void customizeTableCart() {
-        JTableHeader tableHeader = jTableCart.getTableHeader();
+        JTableHeader tableHeader = tblCart.getTableHeader();
         tableHeader.setDefaultRenderer(new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(
@@ -649,5 +700,18 @@ public class OrderForm extends javax.swing.JFrame {
         });  
         tableHeader.setPreferredSize(new Dimension(
                 tableHeader.getPreferredSize().width, 35));
+    }
+
+    private void resetOrderFromToInitialState() {
+        billTotal = 0.0;
+        lblTotal.setText("0.0");
+        setOrderId();
+        loadDate();
+        loadAllCustomerIds();
+        cmbCustomerId.setSelectedItem(null);
+        lblCustomerName.setText("");
+        loadAllItemCodes();
+        clearItemRelatedFields();
+        ((DefaultTableModel)tblCart.getModel()).setRowCount(0);
     }
 }

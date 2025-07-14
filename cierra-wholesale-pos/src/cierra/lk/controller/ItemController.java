@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import cierra.lk.db.DBConnection;
 import cierra.lk.model.Item;
+import cierra.lk.model.OrderDetail;
 
 /**
  *
@@ -87,5 +88,22 @@ public class ItemController {
             itemCodeList.add(rst.getString("code"));
         }
         return itemCodeList;
+    }
+    
+    public static boolean updateStock(ArrayList<OrderDetail> orderDetailsList) throws ClassNotFoundException, SQLException{
+        for (OrderDetail orderDetail : orderDetailsList) {
+            if(!updateStock(orderDetail)){
+                return false;
+            }           
+        }
+        return true;
+    }
+    
+    public static boolean updateStock(OrderDetail orderDetail) throws ClassNotFoundException, SQLException{
+        PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(
+                "UPDATE item SET qtyOnHand = qtyOnHand - ? WHERE code = ?");
+        pstm.setObject(1, orderDetail.getQty());
+        pstm.setObject(2, orderDetail.getItemCode());
+        return pstm.executeUpdate() > 0;
     }
 }
